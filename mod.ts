@@ -48,7 +48,7 @@ const dijkstra = {
     // `costs` in that it provides easy access to the node that currently has
     // the known shortest path from s.
     // XXX: Do we actually need both `costs` and `open`?
-    const open = dijkstra.PriorityQueue;
+    const open = dijkstra.MinPriorityQueue;
     open.push(s, 0);
 
     let closest: Item;
@@ -132,9 +132,9 @@ const dijkstra = {
   },
 
   /**
-   * A very naive priority queue implementation.
+   * A priority queue implementation.
    */
-  PriorityQueue: {
+  MinPriorityQueue: {
     queue: [] as Item[],
 
     sorter(a: { cost: number }, b: { cost: number }): number {
@@ -147,15 +147,72 @@ const dijkstra = {
      */
     push(value: string, cost: number) {
       const item = { value: value, cost: cost };
+      const length = this.queue.length;
       this.queue.push(item);
-      this.queue.sort(this.sorter);
+      this.swim(length);
     },
 
+    parent(i: number): number {
+      return Math.floor((i - 1) / 2);
+    },
+
+    left(i: number): number {
+      return i * 2 + 1;
+    },
+
+    right(i: number): number {
+      return i * 2 + 2;
+    },
+
+    swim(i: number) {
+      const queue = this.queue;
+      while (i > 0) {
+        const pi = this.parent(i);
+        if (this.sorter(queue[i], queue[pi]) >= 0) {
+          break;
+        }
+        this.swap(pi, i);
+        i = pi;
+      }
+    },
+
+    sink(i: number) {
+      const queue = this.queue;
+      // left child index in queue
+      let li = this.left(i);
+      while (li < queue.length) {
+        // current biggest_priority index of data from cur , left child and right child;
+        let bi = i;
+        if (this.sorter(queue[li], queue[bi]) > 0) {
+          bi = li;
+        }
+        // right child index of i
+        let ri = this.right(i);
+        if (ri < queue.length && this.sorter(queue[ri], queue[bi]) > 0) {
+          bi = ri;
+        }
+        if (bi === i) {
+          break;
+        }
+        this.swap(bi, i);
+        i = bi;
+      }
+    },
+
+    swap(i: number, j: number) {
+      let tem = this.queue[i];
+      this.queue[i] = this.queue[j];
+      this.queue[j] = tem;
+    },
     /**
      * Return the highest priority element in the queue.
+     * caller should guarantee current queue is not empty
      */
     pop() {
-      return this.queue.shift();
+      this.swap(0, this.queue.length - 1);
+      const item = this.queue.pop();
+      this.sink(0);
+      return item;
     },
 
     empty(): boolean {
