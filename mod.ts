@@ -1,4 +1,4 @@
-/******************************************************************************
+/** ****************************************************************************
  * Created 2008-08-19.
  *
  * Dijkstra path-finding functions. Adapted from the Dijkstar Python project.
@@ -18,7 +18,7 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
- *****************************************************************************/
+ * *************************************************************************** */
 
 type GraphItem = Record<string, number>;
 type Graph = Record<string, GraphItem>;
@@ -89,7 +89,7 @@ const dijkstra = {
           // cost of u to v across e), update v's cost in the cost list and
           // update v's predecessor in the predecessor list (it's now u).
           cost_of_s_to_v = costs[v];
-          first_visit = (typeof costs[v] === "undefined");
+          first_visit = typeof costs[v] === "undefined";
           if (first_visit || cost_of_s_to_v > cost_of_s_to_u_plus_cost_of_e) {
             costs[v] = cost_of_s_to_u_plus_cost_of_e;
             open.push(v, cost_of_s_to_u_plus_cost_of_e);

@@ -4,7 +4,8 @@
 [![ci](https://github.com/justjavac/deno_dijkstra/actions/workflows/ci.yml/badge.svg)](https://github.com/justjavac/deno_dijkstra/actions/workflows/ci.yml)
 [![license](https://img.shields.io/github/license/justjavac/deno_dijkstra)](https://github.com/justjavac/deno_dijkstra/blob/master/LICENSE)
 
-A simple JavaScript implementation of Dijkstra's single-source shortest-paths algorithm.
+A simple JavaScript implementation of Dijkstra's single-source shortest-paths
+algorithm.
 
 > Base on [tcort/dijkstrajs](https://github.com/tcort/dijkstrajs)
 
@@ -36,4 +37,5 @@ deno run https://deno.land/x/dijkstra/example.ts
 
 ## License
 
-[deno_dijkstra](https://github.com/justjavac/deno_dijkstra) is released under the MIT License. See the bundled [LICENSE](./LICENSE) file for details.
+[deno_dijkstra](https://github.com/justjavac/deno_dijkstra) is released under
+the MIT License. See the bundled [LICENSE](./LICENSE) file for details.
