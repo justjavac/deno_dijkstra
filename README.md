@@ -1,7 +1,7 @@
 # deno_dijkstra
 
 [![tag](https://img.shields.io/github/release/justjavac/deno_dijkstra)](https://github.com/justjavac/deno_dijkstra/releases)
-[![Build Status](https://github.com/justjavac/deno_dijkstra/workflows/ci/badge.svg?branch=master)](https://github.com/justjavac/deno_dijkstra/actions)
+[![ci](https://github.com/justjavac/deno_dijkstra/actions/workflows/ci.yml/badge.svg)](https://github.com/justjavac/deno_dijkstra/actions/workflows/ci.yml)
 [![license](https://img.shields.io/github/license/justjavac/deno_dijkstra)](https://github.com/justjavac/deno_dijkstra/blob/master/LICENSE)
 
 A simple JavaScript implementation of Dijkstra's single-source shortest-paths algorithm.
