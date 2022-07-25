@@ -8,7 +8,7 @@ import dijkstra from "./mod.ts";
 const { find_path } = dijkstra;
 
 Deno.test("should find all paths from a node", function () {
-  var graph = {
+  const graph = {
     a: { b: 10, c: 100, d: 1 },
     b: { c: 10 },
     d: { b: 1, e: 1 },
@@ -18,7 +18,7 @@ Deno.test("should find all paths from a node", function () {
   };
 
   // All paths from 'a'
-  var paths = dijkstra.single_source_shortest_paths(graph, "a");
+  const paths = dijkstra.single_source_shortest_paths(graph, "a");
   assertEquals(paths, {
     d: "a",
     b: "d",
@@ -32,7 +32,7 @@ Deno.test("should find the path between two points, all edges have weight 1", fu
   // A B C
   // D E F
   // G H I
-  var graph = {
+  const graph = {
     a: { b: 10, d: 1 },
     b: { a: 1, c: 1, e: 1 },
     c: { b: 1, f: 1 },
@@ -43,12 +43,12 @@ Deno.test("should find the path between two points, all edges have weight 1", fu
     h: { e: 1, g: 1, i: 1 },
     i: { f: 1, h: 1 },
   };
-  var path = find_path(graph, "a", "i");
+  const path = find_path(graph, "a", "i");
   assertEquals(path, ["a", "d", "e", "f", "i"]);
 });
 
 Deno.test("should find the path between two points, weighted edges", function () {
-  var graph = {
+  const graph = {
     a: { b: 10, c: 100, d: 1 },
     b: { c: 10 },
     d: { b: 1, e: 1 },
@@ -57,14 +57,14 @@ Deno.test("should find the path between two points, weighted edges", function ()
     g: { b: 1 },
   };
 
-  var path = find_path(graph, "a", "c");
+  let path = find_path(graph, "a", "c");
   assertEquals(path, ["a", "d", "e", "f", "c"]);
   path = find_path(graph, "d", "b");
   assertEquals(path, ["d", "b"]);
 });
 
 Deno.test("should throw on unreachable destination", function () {
-  var graph = {
+  const graph = {
     a: { b: 10, c: 100, d: 1 },
     b: { c: 10 },
     d: { b: 1, e: 1 },
@@ -82,7 +82,7 @@ Deno.test("should throw on unreachable destination", function () {
 });
 
 Deno.test("should throw on non-existent destination", function () {
-  var graph = {
+  const graph = {
     a: { b: 10, c: 100, d: 1 },
     b: { c: 10 },
     d: { b: 1, e: 1 },

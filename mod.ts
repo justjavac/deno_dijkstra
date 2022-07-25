@@ -75,7 +75,7 @@ const dijkstra = {
       // the cost of the shortest paths to any or all of those nodes as
       // necessary. v is the node across the current edge from u.
       for (v in adjacent_nodes) {
-        if (adjacent_nodes.hasOwnProperty(v)) {
+        if (Object.prototype.hasOwnProperty.call(adjacent_nodes, v)) {
           // Get the cost of the edge running from u to v.
           cost_of_e = adjacent_nodes[v];
 
@@ -100,7 +100,7 @@ const dijkstra = {
     }
 
     if (typeof d !== "undefined" && typeof costs[d] === "undefined") {
-      var msg = ["Could not find a path from ", s, " to ", d, "."].join("");
+      const msg = ["Could not find a path from ", s, " to ", d, "."].join("");
       throw new Error(msg);
     }
 
@@ -113,10 +113,8 @@ const dijkstra = {
   ): string[] {
     const nodes: string[] = [];
     let u: string = d;
-    let predecessor: string;
     while (u) {
       nodes.push(u);
-      predecessor = predecessors[u];
       u = predecessors[u];
     }
     nodes.reverse();
@@ -124,7 +122,7 @@ const dijkstra = {
   },
 
   find_path: function (graph: Graph, s: string, d: string): string[] {
-    var predecessors = dijkstra.single_source_shortest_paths(graph, s, d);
+    const predecessors = dijkstra.single_source_shortest_paths(graph, s, d);
     return dijkstra.extract_shortest_path_from_predecessor_list(
       predecessors,
       d,
@@ -179,7 +177,7 @@ const dijkstra = {
     sink(i: number) {
       const queue = this.queue;
       // left child index in queue
-      let li = this.left(i);
+      const li = this.left(i);
       while (li < queue.length) {
         // current biggest_priority index of data from cur , left child and right child;
         let bi = i;
@@ -187,7 +185,7 @@ const dijkstra = {
           bi = li;
         }
         // right child index of i
-        let ri = this.right(i);
+        const ri = this.right(i);
         if (ri < queue.length && this.sorter(queue[ri], queue[bi]) > 0) {
           bi = ri;
         }
@@ -200,7 +198,7 @@ const dijkstra = {
     },
 
     swap(i: number, j: number) {
-      let tem = this.queue[i];
+      const tem = this.queue[i];
       this.queue[i] = this.queue[j];
       this.queue[j] = tem;
     },
